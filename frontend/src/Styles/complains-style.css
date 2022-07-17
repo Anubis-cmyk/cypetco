@@ -1,0 +1,110 @@
+.header-image{
+    background-image: url('../images/headerBack.png');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 80%;
+    height: 100px;
+    margin: 3% 10% 0% 10%;
+    border-radius: 15px 15px 0px 0px ;
+    border-bottom: 10px solid #DA251D;
+}
+
+.content-card{
+    background-image: url('../images/e931172d9e05dd966b48838adf0022cc 1.png');
+    background-position:bottom right;
+    background-repeat: no-repeat;
+    background-size: contain; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 79.8%;
+    height: 100%;
+    border: 1px solid #F1ECEC; 
+    border-top: 0px;
+    padding: 2% 10% 5% 10%;
+    box-shadow: 1px 1px 6px 1px #838383;
+    border-radius: 0px 0px 15px 15px ;
+    margin: 0% 10% 5% 10%;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 1%;
+    padding-right: 2%;
+}
+
+.logo{
+    background-image: url('../images/ceypetco_logo.png');
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-width: 150px;
+    min-height: 150px;
+    margin-right: 4%;
+}
+
+.header-text{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 123.52%;
+    font-stretch: extra-expanded;
+    color: #5F3D8B;
+}
+
+.card-body{
+    background-color: rgba(223, 223, 223, 0.8);
+    border-radius: 10px;
+    padding-top: 2% 5% 5% 5%;
+    overflow: hidden;
+    min-height: 450px;
+}
+
+@media screen and (min-width: 1300px) {
+    .header-image{
+        width: 60.1%;
+        margin: auto;
+        margin-top: 3%;
+    }
+    .content-card{
+        width: 40%;
+        margin: auto;
+        margin-bottom: 3%;
+    }
+}
+
+.button-wrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width: 1300px) {
+    .header-text{
+        font-size: 20px;
+    }
+    .form-input-wrap{
+        padding-bottom: 5%;
+    }
+    .button-wrap{
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media screen and (min-width: 500px) {
+    .header-text{
+        font-size: 23px;
+    }
+    .form-input-wrap{
+        padding-bottom: 5%;
+    }
+    .button-wrap{
+        flex-direction: row;
+        align-items: center;
+    }
+}

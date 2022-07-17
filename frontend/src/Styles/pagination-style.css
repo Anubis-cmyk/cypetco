@@ -1,0 +1,28 @@
+.pagination-container{
+    display:flex;
+    flex-direction: row;
+    margin: 20px;
+}
+.red-line{
+    width: 50%;
+    height: 5px;
+    border: 0px; 
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: #DA251D;
+}
+.circle{
+    background-color: #DA251D;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+.circle-disable{
+    border: 2px solid;
+    box-shadow: -2 -4 6 #DA251D;
+    border-color: #DA251D;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+}
