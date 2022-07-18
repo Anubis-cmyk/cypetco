@@ -28,7 +28,7 @@ const initialState = {
  */
 const ComplainsCustomer = () => {
 
-     let navigate = useNavigate();
+    let navigate = useNavigate();
 
     if(!localStorage.length > 0)
            localStorage.setItem("data",JSON.stringify(initialState));
@@ -85,9 +85,10 @@ const ComplainsCustomer = () => {
             }
             
             localStorage.setItem('data',JSON.stringify(userData));
-            navigate("/shed"); 
+            
         }
     }
+    
     return (
         <Container>
             <div className="header-image"></div>
