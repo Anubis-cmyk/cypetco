@@ -1,0 +1,38 @@
+{
+    "CYPETCO_CUSTOMER_COMPLAINS": "CYPETCO வாடிக்கையாளர் புகார்கள்",
+   
+    "CustomerName": "வாடிக்கையாளர் பெயர்",
+    "CustomerMail": "வாடிக்கையாளர் மின்னஞ்சல்",
+    "CustomerContactNumber": "வாடிக்கையாளர் தொடர்பு எண்",
+    "District": "மாவட்டம்",
+    "City": "நகரம்",
+    "Street": "தெரு",
+    "ComplainType": "புகார் வகை",
+    "Complain": "புகார் செய்",
+    
+    "Next": "அடுத்தது",
+    "Back": "மீண்டும்",
+    "Submit": "சமர்ப்பிக்கவும்",
+   
+    "validateCustomerNameIsEmpty": "வாடிக்கையாளர் பெயர் காலியாக இருக்கக்கூடாது! உதாரணம்:- சமன்",
+    "validateCustomerNameValidName": "எழுத்துகளைப் பயன்படுத்தி மட்டுமே சரியான பெயரை உள்ளிடவும்.",
+    "validateCustomerMailIsEmpty": "மின்னஞ்சல் முகவரி காலியாக இருக்கக்கூடாது! எ.கா:- saman@mail.com",
+    "validateCustomerMailIsValid": "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்! எ.கா:- saman@mail.com",
+    "validateCustomerContactNumber is empty": "தொடர்பு எண் காலியாக இருக்கக்கூடாது! எ.கா:- 071 000 0000",
+    "validateCustomerContactNumber is valid": "தொடர்பு எண் தவறானது எண்களை மட்டும் பயன்படுத்தவும்! எ.கா:- 071 000 0000",
+    "validateCustomerContactNumber is 10 digits": "தொடர்பு எண் தவறானது! எ.கா:- 071 000 0000",
+    "validateDistrictIsEmpty": "மாவட்டத்தின் பெயர் காலியாக இருக்கக்கூடாது! எ.கா:- கொழும்பு",
+    "validateCityIsEmpty": "நகரத்தின் பெயர் காலியாக இருக்கக்கூடாது! எ.கா:- கடவத்தை",
+    "validateStreetIsEmpty": "தெருவின் பெயர் காலியாக இருக்கக்கூடாது! எ.கா:- பிரதான சாலை",
+    "validateComplainTypeIsEmpty": "புகார் வகை காலியாக இருக்கக்கூடாது! எ.கா:- புகார் 5 ",
+    "validateComplainIsEmpty": "புகார் காலியாக இருக்க முடியாது! உதாரணம்:- இது என்னுடைய புகார் ",
+   
+    "PlaceholderName": "உங்கள் பெயரை உள்ளிடவும்",
+    "PlaceholderMail": "உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+    "PlaceholderContact": "உங்கள் தொடர்பு எண்ணை உள்ளிடவும்",
+    "PlaceholderDistrict": "பெட்ரோல் கொட்டகை மாவட்டத்தில் உள்ளிடவும்",
+    "PlaceholderCity": "பெட்ரோல் கொட்டகை நகருக்குள் நுழையுங்கள்",
+    "PlaceholderStreet": "பெட்ரோல் கொட்டகை தெருவில் நுழையவும்",
+    "PlaceholderComplainType": "உங்கள் புகார் வகையை உள்ளிடவும்",
+    "PlaceholderComplain": "உங்கள் புகாரை உள்ளிடவும்"
+}

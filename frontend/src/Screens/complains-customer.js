@@ -4,9 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 
 import '../Styles/complains-style.css'; // css
 import '../Styles/form-style.css' // css
+import '../Languages/i18n'; //translations
 
-import { validEmail, ValidContactNumber } from '../Components/validations'; // validations
+import { ValidateName ,validEmail, ValidContactNumber } from '../Components/validations'; // validations
 import Pagination from "../Components/pagination"; // pagination component
+import { Trans, useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 /**
  * initial states for inputs
@@ -29,7 +32,8 @@ const initialState = {
 const ComplainsCustomer = () => {
 
     let navigate = useNavigate();
-
+    const {t} = useTranslation();
+    
     if(!localStorage.length > 0)
            localStorage.setItem("data",JSON.stringify(initialState));
     
@@ -49,18 +53,19 @@ const ComplainsCustomer = () => {
         //validating user inputs
         switch (name) {
         case "customerName":
-            errors.customerName = value.length <= 0 ? "Customer name can not be empty! Ex:- saman " : "";
+            errors.customerName = value.length <= 0 ? t('validateCustomerNameIsEmpty') 
+            :!ValidateName.test(value) ? t('validateCustomerNameValidName')
+            : "";
             break;
         case "customerMail":
-            
-            errors.customerMail = value.length <= 0 ? "E-mail address can not be empty! Ex:- saman@mail.com" 
-            : !validEmail.test(value) ? "Enter valid e-mail address! Ex:- saman@mail.com" 
+            errors.customerMail = value.length <= 0 ? t('validateCustomerMailIsEmpty') 
+            : !validEmail.test(value) ? t('validateCustomerMailIsValid') 
             : "";
             break;
         case "customerContact":
-            errors.customerContact = value.length <= 0 ? "Contact number can not be empty! Ex:- 071 000 0000" 
-            : value.length > 10 ? "Contact number invalid! Ex:- 071 000 0000" 
-            : !ValidContactNumber.test(value)? "Contact number invalid use only numbers! Ex:- 071 000 0000"
+            errors.customerContact = value.length <= 0 ? t('validateCustomerContactNumberIsEmpty')  
+            : value.length > 10 ? t('validateCustomerContactNumberIs10Digits') 
+            : !ValidContactNumber.test(value)? t('validateCustomerContactNumberIsValid')
             :"";
             break;
         default:
@@ -74,7 +79,7 @@ const ComplainsCustomer = () => {
      * submit form data and goto next page
      */
     const submit =() =>{
-        if(formData.customerName !== "" && formData.customerName !== "" && formData.customerContact !== ""){
+        if(formData.customerName !== "" && formData.customerMail && formData.customerContact !== ""){
              const userData ={
                 "customerName":formData.customerName ,
                 "customerMail": formData.customerMail,
@@ -85,7 +90,9 @@ const ComplainsCustomer = () => {
             }
             
             localStorage.setItem('data',JSON.stringify(userData));
-            
+            navigate('/shed');
+        }else{
+            alert("Please fill all the fields")
         }
     }
     
@@ -93,30 +100,35 @@ const ComplainsCustomer = () => {
         <Container>
             <div className="header-image"></div>
             <div className="content-card">
+                <div className="language-row">
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("en")}>en</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("si")}>si</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("ta")}>ta</button>
+                </div>
                 <div className="card-header">
                     <div className='logo'></div>
-                    <p className="header-text">CYPETCO CUSTOMER COMPLAINS</p>
+                    <p className="header-text">{t('CYPETCO_CUSTOMER_COMPLAINS')}</p>
                 </div>
                 <div className="card-body">
                     <div className="form-input-wrap">
-                        <label className="form-label" for="customerName">Customer name</label>
-                        <input type="text" value={formData.customerName} onChange={onchange} name="customerName" id="customerName" className="form-input" placeholder="Enter your name" />
+                        <label className="form-label" for="customerName">{t('CustomerName')}</label>
+                        <input type="text" value={formData.customerName} onChange={onchange} name="customerName" id="customerName" className="form-input" placeholder={t('PlaceholderName')}/>
                         <span className="error-text">{errors.customerName !=""?errors.customerName:""}</span>
                     </div>
                     <div className="form-input-wrap">
-                        <label className="form-label" for="customerMail">Customer e-mail</label>
-                        <input type="mail" value={formData.customerMail} onChange={onchange} name="customerMail" id="customerMail" className="form-input" placeholder="Enter your e-mail address" />
+                        <label className="form-label" for="customerMail">{t('CustomerMail')}</label>
+                        <input type="mail" value={formData.customerMail} onChange={onchange} name="customerMail" id="customerMail" className="form-input" placeholder={t('PlaceholderMail')} />
                         <span className="error-text">{errors.customerMail !=""?errors.customerMail:""}</span>
                     </div>
                     
                     <div className="form-input-wrap">
-                        <label className="form-label" for="customerContact">Customer contact number</label>
-                        <input type="tel" value={formData.customerContact} onChange={onchange} name="customerContact" id="customerContact" className="form-input" placeholder="Enter your contact number" />
+                        <label className="form-label" for="customerContact">{t('CustomerContactNumber')}</label>
+                        <input type="tel" value={formData.customerContact} onChange={onchange} name="customerContact" id="customerContact" className="form-input" placeholder={t('PlaceholderContact')} />
                         <span className="error-text">{errors.customerContact !=""?errors.customerContact:""}</span>
                     </div>
 
                     
-                    <button onClick={submit} className="button button-primary" type="submit">Next</button>
+                    <button onClick={submit} className="button button-primary" type="submit">{t('Next')}</button>
                     
                 </div>
                 <Pagination pageNumber={1}/>

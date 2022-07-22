@@ -4,9 +4,12 @@ import emailjs from '@emailjs/browser';
 
 import '../Styles/complains-style.css'; // css
 import '../Styles/form-style.css' // css
+import '../Languages/i18n' //translation
 
 import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 /**
  * initial states for inputs
@@ -36,7 +39,8 @@ const ComplainsComplain = () => {
         "Other"
     ]}; // complain titles
 
-    let navigate = useNavigate();
+    let navigate = useNavigate();    
+    const {t} = useTranslation();
 
     if(!localStorage.length > 0)
            localStorage.setItem("data",JSON.stringify(initialState));
@@ -71,11 +75,11 @@ const ComplainsComplain = () => {
         //validating user inputs
         switch (name) {
         case "complainTitle":
-            errors.complainTitle = value.length <= 0 ? "Complain type can not be empty! Ex:- Complain 5 " : "";
+            errors.complainTitle = value.length <= 0 ? t('validateComplainTypeIsEmpty') : "";
             formData.complainType = value;
             break;
         case "complain":
-            errors.complain = value.length <= 0 ? "Complain can not be empty! Ex:- This is my complain " : "";
+            errors.complain = value.length <= 0 ? t('validateComplainIsEmpty')  : "";
             break;
         default:
             break;
@@ -118,6 +122,7 @@ const ComplainsComplain = () => {
         emailjs.send('service_gwet8ib', 'template_lva5xyb', data, 'Q6fKDhkKyniPmRzu5')
         .then((result) => {
             console.log(result.text);
+            localStorage.clear();
         }, (error) => {
             console.log(error.text);
         });
@@ -126,13 +131,18 @@ const ComplainsComplain = () => {
         <Container>
             <div className="header-image"></div>
             <div className="content-card">
+                 <div className="language-row">
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("en")}>en</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("si")}>si</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("ta")}>ta</button>
+                </div>
                 <div className="card-header">
                     <div className='logo'></div>
-                    <p className="header-text">CYPETCO CUSTOMER COMPLAINS</p>
+                    <p className="header-text">{t('CYPETCO_CUSTOMER_COMPLAINS')}</p>
                 </div>
                 <div className="card-body">
                     <div className="form-input-wrap">
-                        <label className="form-label" for="complainType">Complain type</label>
+                        <label className="form-label" for="complainType">{t('ComplainType')}</label>
                         <select onChange={SelectOnChange} value={formData.complainType} name="complainType" id="complainType" className="form-input" >
                             <option > -- Select -- </option>
                             {complainsTitleList.type.map( (x,y) => 
@@ -144,23 +154,23 @@ const ComplainsComplain = () => {
                     {otherType&&
                         <>
                             <div className="form-input-wrap">
-                                <label className="form-label" for="complainTitle">Complain type</label>
-                                <input onChange={onchange} type="text" name="complainTitle" id="complainTitle" className="form-input" placeholder="Enter your complain type" />
+                                <label className="form-label" for="complainTitle">{t('ComplainType')}</label>
+                                <input onChange={onchange} type="text" name="complainTitle" id="complainTitle" className="form-input" placeholder={t('PlaceholderComplainType')} />
                                  <span className="error-text">{errors.complainTitle !=""?errors.complainTitle:""}</span>
                             </div>
                         </>
                     }
                     <div className="form-input-wrap">
-                        <label className="form-label" for="complain">Complain</label>
-                        <textarea onChange={onchange} type="text" name="complain" id="complain" className="form-input form-input-textarea" placeholder="Enter your complain"></textarea>
+                        <label className="form-label" for="complain">{t('Complain')}</label>
+                        <textarea onChange={onchange} type="text" name="complain" id="complain" className="form-input form-input-textarea" placeholder={t('PlaceholderComplain')}></textarea>
                          <span className="error-text">{errors.complain !=""?errors.complain:""}</span>
                     </div>
                     
                     <div className="button-wrap">
                        <Link to="/shed">
-                            <button className="button button-secondary" type="submit">Back</button>
+                            <button className="button button-secondary" type="submit">{t('Back')}</button>
                         </Link>                        
-                        <button onClick={submit} className="button button-primary" type="submit">Submit</button>
+                        <button onClick={submit} className="button button-primary" type="submit">{t('Submit')}</button>
                     </div>
                     
                 </div>

@@ -3,10 +3,12 @@ import {Container} from 'react-bootstrap'
 
 import '../Styles/complains-style.css'; // css
 import '../Styles/form-style.css' // css
+import '../Languages/i18n' //translation
 
 import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
 
 /**
  * initial states for inputs
@@ -29,6 +31,7 @@ const initialState = {
 const ComplainsShed = () => {
 
     let navigate = useNavigate();
+    const {t} = useTranslation();
 
     if(!localStorage.length > 0)
         localStorage.setItem("data",JSON.stringify(initialState));
@@ -47,14 +50,14 @@ const ComplainsShed = () => {
         //validating user inputs
         switch (name) {
         case "district":
-            errors.district = value.length <= 0 ? "District name can not be empty! Ex:- Colombo " : "";
+            errors.district = value.length <= 0 ? t('validateDistrictIsEmpty') : "";
             break;
         case "city":
-            errors.city = value.length <= 0 ? "City name can not be empty! Ex:- Kadawatha" 
+            errors.city = value.length <= 0 ? t('validateCityIsEmpty') 
              : "";
             break;
         case "street":
-            errors.street = value.length <= 0 ? "Street name can not be empty! Ex:- Main road" 
+            errors.street = value.length <= 0 ? t('validateStreetIsEmpty') 
             :"";
             break;
         default:
@@ -85,32 +88,37 @@ const ComplainsShed = () => {
         <Container>
             <div className="header-image"></div>
             <div className="content-card">
+                 <div className="language-row">
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("en")}>en</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("si")}>si</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("ta")}>ta</button>
+                </div>
                 <div className="card-header">
                     <div className='logo'></div>
-                    <p className="header-text">CYPETCO CUSTOMER COMPLAINS</p>
+                    <p className="header-text">{t('CYPETCO_CUSTOMER_COMPLAINS')}</p>
                 </div>
                 <div className="card-body">
                     <div className="form-input-wrap">
-                        <label className="form-label" for="district">District</label>
-                        <input type="text" value={formData.district} onChange={onchange} name="district" id="district" className="form-input" placeholder="Enter petrol shed district" />
+                        <label className="form-label" for="district">{t('District')}</label>
+                        <input type="text" value={formData.district} onChange={onchange} name="district" id="district" className="form-input" placeholder= {t('PlaceholderDistrict')}/>
                         <span className="error-text">{errors.district !=""?errors.district:""}</span>
                     </div>
                     <div className="form-input-wrap">
-                        <label className="form-label" for="city">City</label>
-                        <input type="text" value={formData.city} onChange={onchange} name="city" id="city" className="form-input" placeholder="Enter petrol shed city" />
+                        <label className="form-label" for="city">{t('City')}</label>
+                        <input type="text" value={formData.city} onChange={onchange} name="city" id="city" className="form-input" placeholder= {t('PlaceholderCity')}/>
                         <span className="error-text">{errors.city !=""?errors.city:""}</span>
                     </div>
                     <div className="form-input-wrap">
-                        <label className="form-label" for="street">Street</label>
-                        <input type="text" value={formData.street} onChange={onchange} name="street" id="street" className="form-input" placeholder="Enter petrol shed street" />
+                        <label className="form-label" for="street">{t('Street')}</label>
+                        <input type="text" value={formData.street} onChange={onchange} name="street" id="street" className="form-input" placeholder={t('PlaceholderStreet')} />
                         <span className="error-text">{errors.street !=""?errors.street:""}</span>
                     </div>
 
                    <div className="button-wrap">
                        <Link to="/">
-                            <button className="button button-secondary" type="submit">Back</button>
+                            <button className="button button-secondary" type="submit">{t('Back')}</button>
                         </Link>                        
-                        <button onClick={submit} className="button button-primary" type="submit">Next</button>
+                        <button onClick={submit} className="button button-primary" type="submit">{t('Next')}</button>
                     </div>
                 </div>
                 <Pagination pageNumber={2}/>

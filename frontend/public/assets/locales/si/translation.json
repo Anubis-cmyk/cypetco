@@ -1,0 +1,38 @@
+{
+    "CYPETCO_CUSTOMER_COMPLAINS": "CYPETCO පාරිභෝගික පැමිණිලි",
+    
+    "CustomerName": "පාරිභෝගිකයාගේ නම",
+    "CustomerMail": "පාරිභෝගික ඊ මේල් ලිපිනය",
+    "CustomerContactNumber": "පාරිභෝගික දුරකථන අංකය",
+    "District": "දිස්ත්රික්කය",
+    "City": "නගරය",
+    "Street": "වීදිය",
+    "ComplainType": "පැමිණිලි වර්ගය",
+    "Complain": "පැමිණිල්ල",
+
+    "Next": "ඉදිරියට",
+    "Back": "ආපසු",
+    "Submit": "ඉදිරිපත් කරන්න",
+
+    "validateCustomerNameIsEmpty": "පාරිභෝගික නම හිස් විය නොහැක! උදා:- සමන් ",
+    "validateCustomerNameValidName": "නම සඳහා අකුරු පමණක් භාවිතා කරන්න.",
+    "validateCustomerMailIsEmpty": "විද්‍යුත් තැපැල් ලිපිනය හිස් විය නොහැක! උදා:- saman@mail.com",
+    "validateCustomerMailIsValid": "වලංගු විද්‍යුත් තැපැල් ලිපිනයක් ඇතුළු කරන්න! උදා:- saman@mail.com",
+    "validateCustomerContactNumberIsEmpty": "සම්බන්ධතා අංකය හිස් විය නොහැක! උදා:- 071 000 0000",
+    "validateCustomerContactNumberIs10Digits": "සම්බන්ධතා අංකය වලංගු නැත! උදා:- 071 000 0000",
+    "validateCustomerContactNumberIsValid": "සම්බන්ධතා අංකය වලංගු නැත සම්බන්ධතා අංකය සඳහා ඉලක්කම් පමණක් භාවිතා කරන්න! උදා:- 071 000 0000",
+    "validateDistrictIsEmpty": "දිස්ත්‍රික් නම හිස් විය නොහැක! උදා:- කොළඹ ",
+    "validateCityIsEmpty": "නගරයේ නම හිස් විය නොහැක! උදා:- කඩවත",
+    "validateStreetIsEmpty": "වීදි නම හිස් විය නොහැක! උදා:- ප්‍රධාන මාර්ගය",
+    "validateComplainTypeIsEmpty": "පැමිණිලි වර්ගය හිස් විය නොහැක! උදා:- පැමිණිලි 5 ",
+    "validateComplainIsEmpty": "පැමිණිල්ල හිස් විය නොහැක! උදා:- මේ මගේ පැමිණිල්ල ",
+
+    "PlaceholderName":"ඔබගේ නම ඇතුලත් කරන්න",
+    "PlaceholderMail": "ඔබගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුලත් කරන්න",
+    "PlaceholderContact": "ඔබගේ සම්බන්ධතා අංකය ඇතුලත් කරන්න",
+    "PlaceholderDistrict": "පෙට්‍රල් ෂෙඩ් එකේ දිස්ත්‍රික් නම ඇතුළත් කරන්න",
+    "PlaceholderCity": "පෙට්‍රල් ෂෙඩ් එකේ නගරයේ නම ඇතුළත් කරන්න",
+    "PlaceholderStreet": "පෙට්‍රල් ෂෙඩ් එකේ වීදි නම ඇතුළත් කරන්න",
+    "PlaceholderComplainType": "ඔබේ පැමිණිලි වර්ගය ඇතුළත් කරන්න",
+    "PlaceholderComplain": "ඔබේ පැමිණිල්ල ඇතුළත් කරන්න"
+}
