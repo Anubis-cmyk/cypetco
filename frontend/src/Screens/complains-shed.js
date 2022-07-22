@@ -9,6 +9,7 @@ import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Alert from "../Components/alert";
 
 /**
  * initial states for inputs
@@ -39,7 +40,13 @@ const ComplainsShed = () => {
         //useStates
      const [formData, setFormData] = useState(JSON.parse(localStorage.getItem("data")) || initialState); //form date 
      const [errors, setErrors] = useState(initialState); //error message
-    
+     const [showAlert,setShowAlert] = useState(false); //alert 
+     const [alert,setAlert] = useState({
+         message:"",
+         subMessage:"",
+         type:""
+     }) // alert data
+
       /**
      * input onChange method
      * @param {e} e 
@@ -71,7 +78,7 @@ const ComplainsShed = () => {
      * submit form data and goto next page
      */
     const submit =() =>{
-        if(formData.customerName !== "" && formData.customerName !== "" && formData.customerContact !== ""){
+        if(formData.district !== "" && formData.city !== "" && formData.street !== ""){
             const userData ={
                 "customerName":formData.customerName ,
                 "customerMail": formData.customerMail,
@@ -83,9 +90,18 @@ const ComplainsShed = () => {
             localStorage.setItem('data',JSON.stringify(userData));
             navigate("/complain"); 
         }
+        else{
+            alert.message = "Error"
+            alert.subMessage = "Please fill out all the fields"
+            alert.type = "error"  
+            setShowAlert(true);
+        }
     }
     return (
         <Container>
+
+            <Alert message={alert.message} subMessage={alert.subMessage} alertType={alert.type} showAlert={showAlert}  setShowAlert={setShowAlert}/>
+
             <div className="header-image"></div>
             <div className="content-card">
                  <div className="language-row">

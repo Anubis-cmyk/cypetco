@@ -10,6 +10,7 @@ import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Alert from "../Components/alert";
 
 /**
  * initial states for inputs
@@ -50,7 +51,12 @@ const ComplainsComplain = () => {
      const [formData, setFormData] = useState(JSON.parse(localStorage.getItem("data")) || initialState); //form date 
      const [errors, setErrors] = useState(initialState); //error message
      const [otherType, setOtherType] = useState(false); //show or hide other type input message
-    
+     const [showAlert,setShowAlert] = useState(false); //alert 
+     const [alert,setAlert] = useState({
+         message:"",
+         subMessage:"",
+         type:""
+     }) // alert data
 
     const SelectOnChange =(e)=>{
         if(e.target.value === "Other"){
@@ -92,7 +98,7 @@ const ComplainsComplain = () => {
      * submit form data and goto next page
      */
     const submit =() =>{
-        if(formData.customerName !== "" && formData.customerName !== "" && formData.customerContact !== ""){
+        if(formData.complain !== "" && formData.customerName !== "" && formData.customerContact !== ""){
              const userData ={
                 "customerName":formData.customerName ,
                 "customerMail": formData.customerMail,
@@ -107,6 +113,11 @@ const ComplainsComplain = () => {
             localStorage.setItem('data',JSON.stringify(userData));
             sendEmailToOfficers(userData)
             sendEmailToComplainer(userData)
+        }else{
+            alert.message = "Error"
+            alert.subMessage = "Please fill out all the fields"
+            alert.type = "error"  
+            setShowAlert(true);
         }
     }
 
@@ -115,7 +126,11 @@ const ComplainsComplain = () => {
         .then((result) => {
             console.log(result.text);
         }, (error) => {
-            console.log(error.text);
+            setShowAlert(false);
+            alert.message = "Error"
+            alert.subMessage = error.message
+            alert.type = "error"  
+            setShowAlert(true);
         });
     };
     const sendEmailToComplainer = (data) => { 
@@ -123,12 +138,23 @@ const ComplainsComplain = () => {
         .then((result) => {
             console.log(result.text);
             localStorage.clear();
+            setShowAlert(false);
+            alert.message = "success"
+            alert.subMessage = "Thank you, we will contact you soon."
+            alert.type = "success"  
+            setShowAlert(true);
         }, (error) => {
-            console.log(error.text);
+            setShowAlert(false);
+            alert.message = "Error"
+            alert.subMessage = error.message
+            alert.type = "error"  
+            setShowAlert(true);
         });
     };
     return (
         <Container>
+             <Alert message={alert.message} subMessage={alert.subMessage} alertType={alert.type} showAlert={showAlert}  setShowAlert={setShowAlert}/>
+
             <div className="header-image"></div>
             <div className="content-card">
                  <div className="language-row">

@@ -1,0 +1,62 @@
+.alert-card{
+    width: 50%;
+    height: 200px; 
+    z-index: 2;
+    border-radius: 15px;
+    position: absolute;
+    padding: 1%;
+    margin-left: 25%;
+    margin-right: 20%;
+}
+
+.alert-success{
+    background: rgb(137,199,104);
+    background: linear-gradient(160deg, rgba(137,199,104,0.9) 0%, rgba(144,220,138,0.99) 35%, rgba(120,220,173,1) 100%);
+}
+
+.alert-error{
+    background: rgb(226,132,141);
+background: linear-gradient(214deg, rgba(226,132,141,0.9) 0%, rgba(255,151,159,0.99) 35%, rgba(255,190,159,1) 100%);
+}
+
+.alert-header{
+    display: flex;
+    justify-content: flex-end;
+    padding: 1%;
+}
+
+.alert-close{ 
+    border-radius: 50%;
+    border: 0.5px solid white;
+    background-color: rgba(240, 248, 255, 0);
+    color: white;
+    transition:all 0.5s ease-in-out ;
+    cursor: pointer;
+}
+
+.alert-close:hover{
+    background-color: white;
+    color: rgba(22, 22, 22, 0.863);
+}
+
+.alert-message{
+    color: white;
+    font-size: 25px;
+    font-stretch: extra-expanded;
+    letter-spacing: 5px;
+    text-shadow: 1px 15px 6px  rgb(121, 121, 121);
+}
+
+.alert-body{
+    padding: 3%;
+}
+
+@media screen and (min-width: 500px) {
+    .alert-card{
+        width: 30%;
+        margin-left: 35%;
+        margin-right: 35%;
+        padding: 0px;
+        margin-top: 1%;
+    }   
+}

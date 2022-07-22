@@ -10,6 +10,7 @@ import { ValidateName ,validEmail, ValidContactNumber } from '../Components/vali
 import Pagination from "../Components/pagination"; // pagination component
 import { Trans, useTranslation } from "react-i18next";
 import i18next from "i18next";
+import Alert from "../Components/alert";
 
 /**
  * initial states for inputs
@@ -41,7 +42,13 @@ const ComplainsCustomer = () => {
      //useStates
      const [formData, setFormData] = useState(JSON.parse(localStorage.getItem("data")) || initialState); //form date 
      const [errors, setErrors] = useState(initialState); //error message
-    
+     const [showAlert,setShowAlert] = useState(false); //alert 
+     const [alert,setAlert] = useState({
+         "message":"",
+         "subMessage":"",
+         "type":""
+     }) // alert data
+
     
      /**
      * input onChange method
@@ -91,13 +98,19 @@ const ComplainsCustomer = () => {
             
             localStorage.setItem('data',JSON.stringify(userData));
             navigate('/shed');
-        }else{
-            alert("Please fill all the fields")
+        }else{ 
+            alert.message = "Error"
+            alert.subMessage = "Please fill out all the fields"
+            alert.type = "error" 
+            setShowAlert(true);
         }
     }
     
     return (
         <Container>
+
+            <Alert message={alert.message} subMessage={alert.subMessage} alertType={alert.type} showAlert={showAlert}  setShowAlert={setShowAlert}/>
+
             <div className="header-image"></div>
             <div className="content-card">
                 <div className="language-row">
