@@ -1,4 +1,13 @@
 /**
+ * validate name 
+ * only letters a-z & A-Z
+ * not containing other symbols and numbers
+ */
+export const ValidateName = new RegExp(
+    '^[a-z A-Z]*?[a-z A-Z]*$'
+);
+
+/**
  * validate email address
  * check @ sign
  * check email validity

@@ -26,3 +26,18 @@
     width: 50px;
     height: 50px;
 }
+
+@media screen and (min-width: 500px) {
+    
+}
+
+@media screen and (max-width: 1300px) {
+     .circle{
+         width: 25px;
+         height: 25px;
+     }
+     .circle-disable{
+         width: 25px;
+         height: 25px;
+     }
+}

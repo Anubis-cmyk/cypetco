@@ -4,9 +4,16 @@ import emailjs from '@emailjs/browser';
 
 import '../Styles/complains-style.css'; // css
 import '../Styles/form-style.css' // css
+import '../Languages/i18n' //translation
+
+import { API_URL } from "../Constants/constants"; // backend url
 
 import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import Alert from "../Components/alert";
+import axios from 'axios'
 
 /**
  * initial states for inputs
@@ -36,7 +43,8 @@ const ComplainsComplain = () => {
         "Other"
     ]}; // complain titles
 
-    let navigate = useNavigate();
+    let navigate = useNavigate();    
+    const {t} = useTranslation();
 
     if(!localStorage.length > 0)
            localStorage.setItem("data",JSON.stringify(initialState));
@@ -46,7 +54,12 @@ const ComplainsComplain = () => {
      const [formData, setFormData] = useState(JSON.parse(localStorage.getItem("data")) || initialState); //form date 
      const [errors, setErrors] = useState(initialState); //error message
      const [otherType, setOtherType] = useState(false); //show or hide other type input message
-    
+     const [showAlert,setShowAlert] = useState(false); //alert 
+     const [alert,setAlert] = useState({
+         message:"",
+         subMessage:"",
+         type:""
+     }) // alert data
 
     const SelectOnChange =(e)=>{
         if(e.target.value === "Other"){
@@ -71,11 +84,11 @@ const ComplainsComplain = () => {
         //validating user inputs
         switch (name) {
         case "complainTitle":
-            errors.complainTitle = value.length <= 0 ? "Complain type can not be empty! Ex:- Complain 5 " : "";
+            errors.complainTitle = value.length <= 0 ? t('validateComplainTypeIsEmpty') : "";
             formData.complainType = value;
             break;
         case "complain":
-            errors.complain = value.length <= 0 ? "Complain can not be empty! Ex:- This is my complain " : "";
+            errors.complain = value.length <= 0 ? t('validateComplainIsEmpty')  : "";
             break;
         default:
             break;
@@ -87,8 +100,9 @@ const ComplainsComplain = () => {
     /**
      * submit form data and goto next page
      */
-    const submit =() =>{
-        if(formData.customerName !== "" && formData.customerName !== "" && formData.customerContact !== ""){
+    const submit =async(event) =>{
+        event.preventDefault();
+        if(formData.complain !== "" && formData.customerName !== "" && formData.customerContact !== ""){
              const userData ={
                 "customerName":formData.customerName ,
                 "customerMail": formData.customerMail,
@@ -101,8 +115,14 @@ const ComplainsComplain = () => {
             }
             
             localStorage.setItem('data',JSON.stringify(userData));
-            sendEmailToOfficers(userData)
-            sendEmailToComplainer(userData)
+            sendEmailToOfficers(userData);
+            sendEmailToComplainer(userData);
+
+            try {
+                await axios.post(`${API_URL}/complain/add`, userData);
+            } catch (error) {
+                error.response && console.log(error.response.data);
+            }
         }
     }
 
@@ -111,28 +131,49 @@ const ComplainsComplain = () => {
         .then((result) => {
             console.log(result.text);
         }, (error) => {
-            console.log(error.text);
+            setShowAlert(false);
+            alert.message = "Error"
+            alert.subMessage = error.message
+            alert.type = "error"  
+            setShowAlert(true);
         });
     };
     const sendEmailToComplainer = (data) => { 
         emailjs.send('service_gwet8ib', 'template_lva5xyb', data, 'Q6fKDhkKyniPmRzu5')
         .then((result) => {
             console.log(result.text);
+            localStorage.clear();
+            setShowAlert(false);
+            alert.message = "success"
+            alert.subMessage = "Thank you, we will contact you soon."
+            alert.type = "success"  
+            setShowAlert(true);
         }, (error) => {
-            console.log(error.text);
+            setShowAlert(false);
+            alert.message = "Error"
+            alert.subMessage = error.message
+            alert.type = "error"  
+            setShowAlert(true);
         });
     };
     return (
         <Container>
+             <Alert message={alert.message} subMessage={alert.subMessage} alertType={alert.type} showAlert={showAlert}  setShowAlert={setShowAlert}/>
+
             <div className="header-image"></div>
             <div className="content-card">
+                 <div className="language-row">
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("en")}>en</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("si")}>si</button>
+                    <button className="language-buttons" onClick={() =>i18next.changeLanguage("ta")}>ta</button>
+                </div>
                 <div className="card-header">
                     <div className='logo'></div>
-                    <p className="header-text">CYPETCO CUSTOMER COMPLAINS</p>
+                    <p className="header-text">{t('CYPETCO_CUSTOMER_COMPLAINS')}</p>
                 </div>
                 <div className="card-body">
                     <div className="form-input-wrap">
-                        <label className="form-label" for="complainType">Complain type</label>
+                        <label className="form-label" for="complainType">{t('ComplainType')}</label>
                         <select onChange={SelectOnChange} value={formData.complainType} name="complainType" id="complainType" className="form-input" >
                             <option > -- Select -- </option>
                             {complainsTitleList.type.map( (x,y) => 
@@ -144,23 +185,23 @@ const ComplainsComplain = () => {
                     {otherType&&
                         <>
                             <div className="form-input-wrap">
-                                <label className="form-label" for="complainTitle">Complain type</label>
-                                <input onChange={onchange} type="text" name="complainTitle" id="complainTitle" className="form-input" placeholder="Enter your complain type" />
+                                <label className="form-label" for="complainTitle">{t('ComplainType')}</label>
+                                <input onChange={onchange} type="text" name="complainTitle" id="complainTitle" className="form-input" placeholder={t('PlaceholderComplainType')} />
                                  <span className="error-text">{errors.complainTitle !=""?errors.complainTitle:""}</span>
                             </div>
                         </>
                     }
                     <div className="form-input-wrap">
-                        <label className="form-label" for="complain">Complain</label>
-                        <textarea onChange={onchange} type="text" name="complain" id="complain" className="form-input form-input-textarea" placeholder="Enter your complain"></textarea>
+                        <label className="form-label" for="complain">{t('Complain')}</label>
+                        <textarea onChange={onchange} type="text" name="complain" id="complain" className="form-input form-input-textarea" placeholder={t('PlaceholderComplain')}></textarea>
                          <span className="error-text">{errors.complain !=""?errors.complain:""}</span>
                     </div>
                     
                     <div className="button-wrap">
                        <Link to="/shed">
-                            <button className="button button-secondary" type="submit">Back</button>
+                            <button className="button button-secondary" type="submit">{t('Back')}</button>
                         </Link>                        
-                        <button onClick={submit} className="button button-primary" type="submit">Submit</button>
+                        <button onClick={submit} className="button button-primary" type="submit">{t('Submit')}</button>
                     </div>
                     
                 </div>

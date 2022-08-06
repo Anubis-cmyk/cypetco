@@ -1,0 +1,40 @@
+{
+    "CYPETCO_CUSTOMER_COMPLAINS": "CYPETCO CUSTOMER COMPLAINS",
+
+    "CustomerName": "Customer name",
+    "CustomerMail": "Customer e-mail",
+    "CustomerContactNumber": "Customer contact number",
+    "District": "District",
+    "City": "City",
+    "Street": "Street",
+    "ComplainType": "Complain type",
+    "Complain": "Complain",
+
+    "Next": "Next",
+    "Back": "Back",
+    "Submit": "Submit",
+
+    "validateCustomerNameIsEmpty": "Customer name can not be empty! Ex:- saman ",
+    "validateCustomerNameValidName": "Enter valid name only using letters.",
+    "validateCustomerMailIsEmpty": "E-mail address can not be empty! Ex:- saman@mail.com",
+    "validateCustomerMailIsValid": "Enter valid e-mail address! Ex:- saman@mail.com",
+    "validateCustomerContactNumber is empty": "Contact number can not be empty! Ex:- 071 000 0000",
+    "validateCustomerContactNumber is valid": "Contact number invalid use only numbers! Ex:- 071 000 0000",
+    "validateCustomerContactNumber is 10 digits": "Contact number invalid! Ex:- 071 000 0000",
+    "validateDistrictIsEmpty": "District name can not be empty! Ex:- Colombo ",
+    "validateCityIsEmpty": "City name can not be empty! Ex:- Kadawatha",
+    "validateStreetIsEmpty": "Street name can not be empty! Ex:- Main road",
+    "validateComplainTypeIsEmpty": "Complain type can not be empty! Ex:- Complain 5 ",
+    "validateComplainIsEmpty": "Complain can not be empty! Ex:- This is my complain ",
+
+    "PlaceholderName": "Enter your name",
+    "PlaceholderMail": "Enter your e-mail address",
+    "PlaceholderContact": "Enter your contact number",
+    "PlaceholderDistrict": "Enter petrol shed district",
+    "PlaceholderCity": "Enter petrol shed city",
+    "PlaceholderStreet": "Enter petrol shed street",
+    "PlaceholderComplainType": "Enter your complaint type",
+    "PlaceholderComplain": "Enter your complaint"
+
+    
+}
