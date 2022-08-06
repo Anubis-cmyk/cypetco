@@ -6,11 +6,14 @@ import '../Styles/complains-style.css'; // css
 import '../Styles/form-style.css' // css
 import '../Languages/i18n' //translation
 
+import { API_URL } from "../Constants/constants"; // backend url
+
 import Pagination from "../Components/pagination"; // pagination component
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import Alert from "../Components/alert";
+import axios from 'axios'
 
 /**
  * initial states for inputs
@@ -97,7 +100,8 @@ const ComplainsComplain = () => {
     /**
      * submit form data and goto next page
      */
-    const submit =() =>{
+    const submit =async(event) =>{
+        event.preventDefault();
         if(formData.complain !== "" && formData.customerName !== "" && formData.customerContact !== ""){
              const userData ={
                 "customerName":formData.customerName ,
@@ -111,13 +115,14 @@ const ComplainsComplain = () => {
             }
             
             localStorage.setItem('data',JSON.stringify(userData));
-            sendEmailToOfficers(userData)
-            sendEmailToComplainer(userData)
-        }else{
-            alert.message = "Error"
-            alert.subMessage = "Please fill out all the fields"
-            alert.type = "error"  
-            setShowAlert(true);
+            sendEmailToOfficers(userData);
+            sendEmailToComplainer(userData);
+
+            try {
+                await axios.post(`${API_URL}/complain/add`, userData);
+            } catch (error) {
+                error.response && console.log(error.response.data);
+            }
         }
     }
 

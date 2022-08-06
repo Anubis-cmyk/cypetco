@@ -8,6 +8,7 @@ import { BrowserRouter , Routes, Route} from 'react-router-dom';
 import ComplainsCustomer  from './Screens/complains-customer';   // complains customer screen
 import ComplainsShed from './Screens/complains-shed'; // complains sed screen
 import ComplainsComplain from './Screens/complains-complain';  //complains details screen 
+import ReportScreen from './Screens/report';  //report screen 
 /**
  * main application function
  * @returns App
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<ComplainsCustomer/>}/>
               <Route path="/shed" element={<ComplainsShed/>}/>
               <Route path="/complain" element={<ComplainsComplain/>}/> 
+              <Route path="/report" element={<ReportScreen/>}/> 
        </Routes>
     </main>
     </BrowserRouter>
